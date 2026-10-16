@@ -1,0 +1,12 @@
+html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *::after {
+  transition: background-color .45s cubic-bezier(.4,0,.2,1), color .45s cubic-bezier(.4,0,.2,1), border-color .45s cubic-bezier(.4,0,.2,1), fill .45s ease, stroke .45s ease, box-shadow .45s ease !important;
+}
+
+.reveal-ready .reveal { opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
+.reveal-ready .reveal.in { opacity:1; transform:none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  .reveal-ready .reveal { opacity:1; transform:none; transition:none; }
+  .bar.indeterminate, .dot.busy { animation:none; }
+  .ico { transition:none; }
+}
