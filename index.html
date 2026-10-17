@@ -16,11 +16,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://mc-api.bisai.dev" crossorigin>
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="css/layout.css">
 <link rel="stylesheet" href="css/effects.css">
 <link rel="stylesheet" href="css/viewer.css">
+<link rel="stylesheet" href="css/grid.css">
+<link rel="stylesheet" href="css/lists.css">
 </head>
 <body>
 <header class="nav">
@@ -53,36 +56,93 @@
 
   <div id="viewer" class="wrap" hidden>
     <p id="viewerMeta" class="viewer-meta"></p>
-    <div class="stats">
+    <div class="stats two">
       <div class="stat"><span class="n">01</span><strong id="vKinds">--</strong><span class="l">Unique item types</span></div>
       <div class="stat"><span class="n">02</span><strong id="vTotal">--</strong><span class="l">Total items counted</span></div>
-      <div class="stat"><span class="n">03</span><strong id="vContainers">--</strong><span class="l">Non-empty containers</span></div>
     </div>
-    <section class="section">
-      <div class="grid-2">
-        <div class="card panel">
-          <h3>Items</h3>
-          <p class="desc">Sorted by quantity, largest first.</p>
-          <div class="controls">
-            <input id="vSearch" type="search" placeholder="Filter items, for example diamond" aria-label="Filter items">
-          </div>
-          <div id="vResults" class="empty"></div>
-        </div>
-        <div class="card panel">
-          <h3>Containers</h3>
-          <p class="desc">Non-empty containers by type. Shulker boxes of every colour are counted together.</p>
-          <div id="vContainerList" class="empty"></div>
-        </div>
+
+    <details id="breakdown" class="card fold">
+      <summary><span>Full item breakdown</span><span id="bdCount" class="fold-sub"></span></summary>
+      <div class="fold-body">
+        <div class="controls"><input id="bdSearch" type="search" placeholder="Filter items, for example diamond" aria-label="Filter items"></div>
+        <div id="bdTable" class="empty"></div>
       </div>
+    </details>
+
+    <section class="section">
+      <div class="sec-head">
+        <div><span class="idx">Suggestions</span><h2>Sorting suggestions</h2></div>
+        <p>Item types grouped by how much of each the world holds. Click any item to choose a different group for it.</p>
+      </div>
+      <div id="suggestions" class="stack"></div>
+    </section>
+
+    <section class="section">
+      <div class="sec-head">
+        <div><span class="idx">All items</span><h2>Every item type</h2></div>
+        <p>Largest to smallest. Search for an item, or click a tile to mark it as bulk, chest hall, MIS, unstackable or unsorted.</p>
+      </div>
+      <div class="card panel">
+        <div class="controls">
+          <input id="allSearch" type="search" placeholder="Search items, for example diamond" aria-label="Search items">
+          <label class="menu-row void">
+            <input id="voidOn" type="checkbox">
+            <span>Void items under</span>
+            <input id="voidMin" type="number" min="1" step="1" value="10" disabled aria-label="Void items under this quantity">
+          </label>
+        </div>
+        <div class="legend" aria-label="Colour key">
+          <span class="c-bulk"><i class="sw"></i>Bulk</span>
+          <span class="c-hall"><i class="sw"></i>Chest hall</span>
+          <span class="c-mis"><i class="sw"></i>MIS</span>
+          <span class="c-unstackable"><i class="sw"></i>Unstackable</span>
+          <span class="c-unsorted"><i class="sw"></i>Unsorted</span>
+        </div>
+        <p id="allInfo" class="info"></p>
+        <div id="allGrid" class="tiles"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="sec-head">
+        <div><span class="idx">Your lists</span><h2>Sorted lists</h2></div>
+        <p>The suggestions with your changes applied. Voided items are left out of these lists and the export.</p>
+      </div>
+      <div class="list-actions">
+        <button id="exportXlsx" class="btn solid" type="button">Export Excel (.xlsx)</button>
+        <button id="exportCsv" class="btn" type="button">Export CSV</button>
+      </div>
+      <div id="lists" class="lists"></div>
     </section>
   </div>
 </main>
 
+<div id="tagMenu" class="tag-menu" role="dialog" aria-label="Choose a group" hidden></div>
+<div id="tip" class="tip" role="tooltip" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script src="js/utils/helpers.js"></script>
+<script src="js/utils/format.js"></script>
+<script src="js/utils/workbook.js"></script>
+<script src="js/config/rules.js"></script>
+<script src="js/config/unstackable.js"></script>
+<script src="js/config/sortable.js"></script>
 <script src="js/logic/codestore.js"></script>
-<script src="js/ui/table.js"></script>
+<script src="js/logic/classify.js"></script>
+<script src="js/logic/overrides.js"></script>
+<script src="js/logic/view-state.js"></script>
+<script src="js/logic/export-book.js"></script>
 <script src="js/ui/theme.js"></script>
+<script src="js/ui/icons.js"></script>
+<script src="js/ui/tooltip.js"></script>
+<script src="js/ui/grid.js"></script>
+<script src="js/ui/tag-menu.js"></script>
+<script src="js/ui/breakdown.js"></script>
+<script src="js/ui/suggestions.js"></script>
+<script src="js/ui/full-grid.js"></script>
+<script src="js/ui/lists.js"></script>
 <script src="js/ui/viewer.js"></script>
+<script src="js/buttons/export-lists.js"></script>
 <script src="js/ui/code-input.js"></script>
 </body>
 </html>
