@@ -2,7 +2,8 @@
 .tile { position:relative; width:64px; height:64px; padding:0; display:flex; align-items:center; justify-content:center; border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--ink); cursor:pointer; transition:border-color .12s, background .12s; }
 .tile:hover { border-color:var(--line-hover); background:var(--hover); }
 .tile:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
-.tile[data-cat] { border-color:var(--cc); box-shadow:inset 0 0 0 1px var(--cc); }
+.tile[data-cat] { border-color:color-mix(in srgb,var(--cc) 45%,transparent); background:color-mix(in srgb,var(--cc) 12%,var(--bg)); box-shadow:none; }
+.tile[data-cat]:hover { background:color-mix(in srgb,var(--cc) 20%,var(--bg)); border-color:var(--cc); }
 .tile[data-cat="bulk"] { --cc:var(--c-bulk); }
 .tile[data-cat="hall"] { --cc:var(--c-hall); }
 .tile[data-cat="mis"] { --cc:var(--c-mis); }
