@@ -36,7 +36,7 @@
     table.replaceChildren();
     count.textContent = fmt.types(WS.view.rows.length);
   };
-  box.addEventListener('toggle', () => { if (box.open && !built) render(); });
-  search.addEventListener('input', render);
+  if (box) box.addEventListener('toggle', () => { if (box.open && !built) render(); });
+  if (search) search.addEventListener('input', render);
   WS.breakdown = {reset};
 })();

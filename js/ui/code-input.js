@@ -12,14 +12,20 @@
     if (kind) wrap.classList.add(kind === 'error' ? 'bad' : 'ok');
   };
   const submit = () => {
-    const rec = WS.codes.load(value());
-    if (!rec) { WS.hideWorld(); setMsg('No world found for that code in this browser.', 'error'); return; }
+    const code = value();
+    const rec = WS.codes.load(code);
+    if (!rec) {
+      if (typeof WS.hideWorld === 'function') WS.hideWorld();
+      setMsg('No world found for that code in this browser.', 'error');
+      return;
+    }
     setMsg(`Loaded ${rec.name}.`, 'ok');
-    WS.showWorld(rec);
+    if (typeof WS.showWorld === 'function') WS.showWorld(rec, code);
+    else setMsg('Viewer failed to load. Refresh the page and try again.', 'error');
   };
   const update = () => {
     if (value().length === 6) { submit(); return; }
-    WS.hideWorld();
+    if (typeof WS.hideWorld === 'function') WS.hideWorld();
     setMsg(DEFAULT, '');
   };
   const fill = (box, ch) => { box.value = ch; box.classList.toggle('filled', !!ch); };

@@ -27,9 +27,11 @@
     tiles.forEach(paint);
     apply();
   };
-  search.addEventListener('input', apply);
-  search.addEventListener('keydown', e => { if (e.key === 'Enter') { const t = tiles.find(x => !x.hidden); if (t) { t.scrollIntoView({block:'center', behavior:'instant'}); WS.openTag(t); } } });
-  vOn.addEventListener('change', () => { WS.view.voidOn = vOn.checked; vMin.disabled = !vOn.checked; WS.refreshAll(); });
-  vMin.addEventListener('input', () => { WS.view.voidMin = Math.max(0, Math.floor(Number(vMin.value) || 0)); WS.refreshAll(); });
+  if (search) {
+    search.addEventListener('input', apply);
+    search.addEventListener('keydown', e => { if (e.key === 'Enter') { const t = tiles.find(x => !x.hidden); if (t) { t.scrollIntoView({block:'center', behavior:'instant'}); WS.openTag(t); } } });
+  }
+  if (vOn) vOn.addEventListener('change', () => { WS.view.voidOn = vOn.checked; if (vMin) vMin.disabled = !vOn.checked; WS.refreshAll(); });
+  if (vMin) vMin.addEventListener('input', () => { WS.view.voidMin = Math.max(0, Math.floor(Number(vMin.value) || 0)); WS.refreshAll(); });
   WS.fullGrid = {build, apply, paint:() => tiles.forEach(paint)};
 })();
