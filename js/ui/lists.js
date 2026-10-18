@@ -16,18 +16,36 @@
       p.appendChild(e);
       return p;
     }
-    const ul = document.createElement('ul');
-    ul.className = 'rows';
-    for (const r of rows) {
-      const li = document.createElement('li'), nm = document.createElement('span'), num = document.createElement('span');
-      nm.className = 'nm';
-      nm.textContent = fmt.display(r.name);
-      num.className = 'num';
-      num.textContent = r.count.toLocaleString();
-      li.append(WS.icon(r, 'sm'), nm, num);
-      ul.appendChild(li);
-    }
-    p.appendChild(ul);
+    const list = rs => {
+      const ul = document.createElement('ul');
+      ul.className = 'rows';
+      for (const r of rs) {
+        const li = document.createElement('li'), nm = document.createElement('span'), num = document.createElement('span');
+        nm.className = 'nm';
+        nm.textContent = fmt.display(r.name);
+        num.className = 'num';
+        num.textContent = r.count.toLocaleString();
+        li.append(WS.icon(r, 'sm'), nm, num);
+        ul.appendChild(li);
+      }
+      return ul;
+    };
+    if (c.key === 'unstackable') {
+      p.classList.add('wide');
+      const cols = document.createElement('div');
+      cols.className = 'cols';
+      WS.groupSortable(rows).forEach(grp => {
+        const col = document.createElement('div'), head = document.createElement('div');
+        col.className = 'col';
+        head.className = 'col-head';
+        head.innerHTML = '<span class="col-name"></span><span class="col-n"></span>';
+        head.firstChild.textContent = fmt.display(grp.name);
+        head.lastChild.textContent = grp.rows.length.toLocaleString();
+        col.append(head, list(grp.rows));
+        cols.appendChild(col);
+      });
+      p.appendChild(cols);
+    } else p.appendChild(list(rows));
     return p;
   };
   const render = () => {
