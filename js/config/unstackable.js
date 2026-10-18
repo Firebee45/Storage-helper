@@ -1,4 +1,4 @@
-// Every item with Stackability = "Unstackable" (stack size 1) in the Structureless Superflat Item List.
+
 WS.config.unstackable = {
   patterns:[],
   names:[
