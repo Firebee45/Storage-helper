@@ -35,12 +35,8 @@
       const cols = document.createElement('div');
       cols.className = 'cols';
       WS.groupSortable(rows).forEach(grp => {
-        const col = document.createElement('div'), head = document.createElement('div');
-        col.className = 'col';
-        head.className = 'col-head';
-        head.innerHTML = '<span class="col-name"></span><span class="col-n"></span>';
-        head.firstChild.textContent = fmt.display(grp.name);
-        head.lastChild.textContent = grp.rows.length.toLocaleString();
+        const col = document.createElement('div'), head = WS.colHead(grp);
+        col.className = grp.rows.length === 1 ? 'col one' : 'col';
         col.append(head, list(grp.rows));
         cols.appendChild(col);
       });
