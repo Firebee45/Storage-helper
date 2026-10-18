@@ -32,7 +32,9 @@
 .cols { display:flex; align-items:flex-start; gap:12px; margin-top:14px; overflow-x:auto; padding-bottom:6px; }
 .col { flex:0 0 auto; width:min(340px,84vw); border:1px solid var(--line); border-radius:10px; background:var(--surface); overflow:hidden; }
 .col-head { position:sticky; top:0; display:flex; align-items:center; justify-content:space-between; gap:10px; padding:9px 12px; border-bottom:1px solid var(--line); background:color-mix(in srgb,var(--cc) 14%,var(--surface)); font-size:13px; font-weight:600; letter-spacing:-0.01em; }
+.col-name { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .col-n { color:var(--muted); font-weight:500; font-variant-numeric:tabular-nums; }
 .col .tiles { margin:0; padding:10px; }
 .col .rows { padding:0 12px; }
 .list.wide { grid-column:1 / -1; }
+.col.one { width:auto; min-width:150px; max-width:240px; }
