@@ -1,4 +1,3 @@
-
 WS.config.unstackable = {
   patterns:[],
   names:[
@@ -187,7 +186,7 @@ WS.config.unstackable = {
     "orange harness",
     "orange shulker box",
     "pale oak boat",
-    "pale oak trapdoor",
+    "pale oak boat with chest",
     "piglin banner pattern",
     "pink bed",
     "pink bundle",
