@@ -18,7 +18,22 @@
     i.className = 'info';
     i.textContent = d.info(rows.length);
     g.className = 'tiles';
-    if (rows.length) WS.fillTiles(g, rows); else { g.className = 'empty'; g.textContent = 'Nothing fits this group.'; }
+    if (!rows.length) { g.className = 'empty'; g.textContent = 'Nothing fits this group.'; }
+    else if (d.key === 'unstackable') {
+      g.className = 'cols';
+      WS.groupSortable(rows).forEach(grp => {
+        const col = document.createElement('div'), head = document.createElement('div'), t = document.createElement('div');
+        col.className = 'col';
+        head.className = 'col-head';
+        head.innerHTML = '<span class="col-name"></span><span class="col-n"></span>';
+        head.firstChild.textContent = WS.fmt.display(grp.name);
+        head.lastChild.textContent = grp.rows.length.toLocaleString();
+        t.className = 'tiles';
+        WS.fillTiles(t, grp.rows);
+        col.append(head, t);
+        g.appendChild(col);
+      });
+    } else WS.fillTiles(g, rows);
     c.append(h, p, i, g);
     return c;
   };
