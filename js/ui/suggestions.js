@@ -23,7 +23,7 @@
       g.className = 'cols';
       WS.groupSortable(rows).forEach(grp => {
         const col = document.createElement('div'), head = WS.colHead(grp), t = document.createElement('div');
-        col.className = grp.rows.length === 1 ? 'col one' : 'col';
+        col.className = 'col two';
         t.className = 'tiles';
         WS.fillTiles(t, grp.rows);
         col.append(head, t);
