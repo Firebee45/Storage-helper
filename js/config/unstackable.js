@@ -89,6 +89,7 @@ WS.config.unstackable = {
     "golden leggings",
     "golden pickaxe",
     "golden shovel",
+    "golden spear",
     "golden sword",
     "gray bed",
     "gray bundle",
